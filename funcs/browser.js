@@ -23,6 +23,36 @@ const launchChrome = async () => {
         return chrome;
     } catch(e) {
         console.error('Unable to launch Chrome', e);
-        return false;
+        // return two functions to silent errors
+        return [()=>{}, () => {}];
     }
+
+    // Exits Chrome the launched browser
+    const exitChrome = async () => {
+        if(!chrome) return;
+        try {
+            await chrome.close();
+        }catch(e) {}
+    }
+
+    // Opens a new page in Chrome
+    const newPage = async () => {
+        try{
+            const page = await chrome.newPage();
+            const closePage = async () => {
+                if(!page) return;
+                try {
+                    await page.close();
+                } catch(e) {}
+            }
+            return [page, closePage];
+        }catch(e) {
+            console.log("Unable to create a new page");
+            return [];
+        }
+    };
+
+    return [newPage, exitChrome];
 };
+
+module.exports = { launchChrome };  // Exports the function so that it can be imported and used by other files/modules
