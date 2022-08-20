@@ -23,4 +23,19 @@ const scrapeData = async () => {
     await exitChrome(); // Close Chrome
 };
 
-module.exports = scrapeData;
+const clickBtn = async (btn) => {
+    try {
+        await page.evaluate(() => {
+            const btnSelector = btn;
+            const theBtn = await page.waitForSelector(btnSelector);
+            await theBtn.click();
+        });
+    } catch(err) {
+        console.error('Unable to click the button', err);
+    }
+};
+
+module.exports = {
+    scrapeData,
+    clickBtn
+};
