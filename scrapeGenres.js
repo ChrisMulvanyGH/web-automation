@@ -1,10 +1,8 @@
-const puppeteer = require('puppeteer');
-
-(async () => {
-    'use strict'
+async function scrapeGenres() {
+    const puppeteer = require('puppeteer');
 
     const url = 'https://www.goodreads.com/choiceawards/best-books-2020';
-    const browser = await puppeteer.launch({ headless: false, defaultViewport: null });
+    const browser = await puppeteer.launch({ headless: true, defaultViewport: null });
     const page = await browser.newPage();
     console.log('Opening ' + url);
     try {
@@ -28,7 +26,11 @@ const puppeteer = require('puppeteer');
         }
         return allGenres;
     });
-    console.log(genres);
+    // console.log(genres);
     return genres;
 
-})();
+};
+
+module.exports = {
+    scrapeGenres,
+}

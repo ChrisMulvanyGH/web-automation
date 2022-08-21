@@ -1,0 +1,10 @@
+html 
+  head 
+    title Book Finder 
+  body 
+    h1 Choose A Genre 
+    form(action='/' method='post')
+     select(name='genreDdown' id='')
+      each genre in genres 
+       option(value=genre.link) #{genre.title}
+     button(type='submit') Search
