@@ -15,7 +15,6 @@ const puppeteer = require('puppeteer');
         console.error('Unable to visit: ' + url, err);
         await browser.close();
     }
-
         
     const genres = await page.evaluate(() => {
         const genre = document.querySelectorAll('.category.clearFix');
@@ -25,11 +24,11 @@ const puppeteer = require('puppeteer');
             allGenres.push({
                 title: genre[i].querySelector('h4').innerText,
                 link: genre[i].querySelector('a[href').href
-            })
+            });
         }
         return allGenres;
     });
     console.log(genres);
+    return genres;
 
-    await browser.close();    
 })();
