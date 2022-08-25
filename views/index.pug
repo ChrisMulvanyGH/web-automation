@@ -4,7 +4,7 @@ html
   body 
     h1 Choose A Genre 
     form(action='/' method='post')
-     select(name='genreDdown' id='')
+     select(name='genreDown' id='genreDD')
       each genre in genres 
        option(value=genre.link) #{genre.title}
      button(type='submit') Search

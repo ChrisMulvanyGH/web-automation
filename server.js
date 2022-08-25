@@ -12,23 +12,14 @@ const port = 3000;
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
-
 // APP MIDDLEWARE
 app.use(bodyParser.json());
 
 // APP ROUTES
 app.get('/', async(req, res) => {
-    const genreList = await getGenres.scrapeGenres();
-    res.send(genreList);
+    const genres = await getGenres.scrapeGenres();
+    res.render('index', { genres });
 });
-
-app.post('/b/', async(req, res) => {
-    const randBook = await getBook.pickRandomBook();
-    res.send(randBook);
-})
-
-
-
 
 // APP SERVER SETUP 
 app.listen(port, hostname, () => {
